@@ -1,0 +1,36 @@
+Write a program to verify PIN first, then allow withdrawal only if balance is sufficient.
+
+using System;
+
+class ATMSystem
+{
+    static void Main()
+    {
+        int correctPin = 0000;
+        double balance = 50000.0;
+        
+        Console.WriteLine("Enter PIN: ");
+        int enteredPin = int.Parse(Console.ReadLine());
+        
+        if (enteredPin == correctPin)
+        {
+            Console.WriteLine("Enter withdrawal amount: ");
+            double amount = double.Parse(Console.ReadLine());
+            
+            if (amount <= balance)
+            {
+                balance -= amount;
+                Console.WriteLine($" Withdrawal successful!");
+                Console.WriteLine($"New balance: Rs {balance:F2}");
+            }
+            else
+            {
+                Console.WriteLine(" Insufficient balance!");
+            }
+        }
+        else
+        {
+            Console.WriteLine(" Incorrect PIN!");
+        }
+    }
+}
