@@ -1,0 +1,48 @@
+//Write a program that calculates bill and gives discount based on customer category (senior citizen, regular, industrial).
+
+using System;
+
+class ElectricityBillCalculator
+{
+    static void Main()
+    {
+        Console.WriteLine("=== Electricity Bill Calculator ===");
+        Console.WriteLine("\nEnter units consumed: ");
+        int units = int.Parse(Console.ReadLine());
+        
+        Console.WriteLine("Categories: 1-Senior Citizen, 2-Regular, 3-Industrial");
+        Console.WriteLine("\nEnter category : ");
+        int category = int.Parse(Console.ReadLine());
+        
+        double baseRate = 6.0;
+        double discount = 0;
+        
+        if (category == 1)
+        {
+            discount = 0.20;
+            Console.WriteLine("20% discount applied (Senior Citizen)");
+        }
+        else if (category == 2)
+        {
+            discount = 0.10;
+            Console.WriteLine("10% discount applied (Regular)");
+        }
+        else if (category == 3)
+        {
+            discount = 0.05;
+            Console.WriteLine("0.5% discount applied (Industrial)");
+        }
+        else
+        {
+            Console.WriteLine("Invalid category - No discount");
+        }
+        
+        double billAmount = units * baseRate;
+        double finalBill = billAmount * (1 - discount);
+        
+        Console.WriteLine($"\nUnits: {units}");
+        Console.WriteLine($"Base Bill: Rs {billAmount:F2}");
+        Console.WriteLine($"Discount: Rs {billAmount * discount:F2}");
+        Console.WriteLine($"Final Bill: Rs {finalBill:F2}");
+    }
+}
