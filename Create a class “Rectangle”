@@ -47,6 +47,6 @@ class Program
 
       Rectangle r2 = new Rectangle(8, 4);
       Console.WriteLine("Parameterized Constructor Object");
-      r2.Display()
+      r2.Display();
     }
 }
