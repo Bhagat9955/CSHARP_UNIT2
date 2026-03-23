@@ -1,0 +1,56 @@
+Create a class Employee that contains employeeId, name, and salary as instance variables. 
+
+
+using System;
+
+public class Employee
+{
+    public int employeeId;
+    public string name;
+    public double salary;
+
+    public Employee()
+    {
+        employeeId = 0;
+        name = "";
+        salary = 0.0;
+    }
+
+    public Employee(int id, string n, double s)
+    {
+        employeeId = id;
+        name = n;
+        salary = s;
+    }
+
+    public double CalculateAnnualSalary()
+    {
+        return salary * 12;
+    }
+
+    public void Display()
+    {
+        Console.WriteLine($"Employee ID: {employeeId}");
+        Console.WriteLine($"Name: {name}");
+        Console.WriteLine($"Monthly Salary: ${salary}");
+        Console.WriteLine($"Annual Salary: ${CalculateAnnualSalary():F2}");
+        Console.WriteLine("-------------------");
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        Employee emp1 = new Employee(101, "Rahul Sharma", 50000);
+        Console.WriteLine("Employee 1:");
+        emp1.Display();
+
+        Employee emp2 = new Employee();
+        emp2.employeeId = 102;
+        emp2.name = "Priya Patel";
+        emp2.salary = 45000;
+        Console.WriteLine("Employee 2:");
+        emp2.Display();
+    }
+}
