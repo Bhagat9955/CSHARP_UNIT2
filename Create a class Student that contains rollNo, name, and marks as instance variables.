@@ -1,0 +1,76 @@
+ Create a class Student that contains rollNo, name, and marks as instance variables. 
+
+using System;
+
+public class Student
+{
+    public int rollNo;
+    public string name;
+    public int marks;
+
+    public Student()
+    {
+        rollNo = 0;
+        name = "";
+        marks = 0;
+    }
+
+    public Student(int r, string n, int m)
+    {
+        rollNo = r;
+        name = n;
+        marks = m;
+    }
+
+    public string CalculateGrade()
+    {
+        if (marks >= 90)
+            return "A";
+        else if (marks >= 80)
+            return "B";
+        else if (marks >= 70)
+            return "C";
+        else if (marks >= 60)
+            return "D";
+        else
+            return "F";
+    }
+
+    public void Display()
+    {
+        Console.WriteLine("=========================================");
+        Console.WriteLine("              STUDENT DETAILS            ");
+        Console.WriteLine("=========================================");
+        Console.WriteLine("Roll Number : " + rollNo);
+        Console.WriteLine("Student Name: " + name);
+        Console.WriteLine("Total Marks : " + marks);
+        Console.WriteLine("Grade       : " + CalculateGrade());
+        Console.WriteLine("=========================================");
+    }
+}
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        Console.WriteLine("=== STUDENT MANAGEMENT SYSTEM ===\n");
+
+        Student student1 = new Student(1001, "Rahul Sharma", 92);
+        Console.WriteLine("DETAILS OF STUDENT USING PARAMETERIZED CONSTRUCTOR:");
+        Console.WriteLine();
+        student1.Display();
+
+        Console.WriteLine();
+
+        Student student2 = new Student();
+        student2.rollNo = 1002;
+        student2.name = "Priya Patel";
+        student2.marks = 78;
+        Console.WriteLine("DETAILS OF STUDENT USING DEFAULT CONSTRUCTOR:");
+        Console.WriteLine();
+        student2.Display();
+
+        Console.WriteLine("\nPress any key to exit...");
+        Console.ReadKey();
+    }
+}
