@@ -1,0 +1,81 @@
+//Create a class that contains instance variables such as and . Derive two classes from it named and .
+
+using System;
+
+class Account
+{
+    public int accNo;
+    public string name;
+    public double balance;
+
+    public Account(int accNo, string name, double balance)
+    {
+        this.accNo = accNo;
+        this.name = name;
+        this.balance = balance;
+    }
+
+    public virtual void Deposit(double amount)
+    {
+        balance += amount;
+    }
+
+    public virtual void Withdraw(double amount)
+    {
+        balance -= amount;
+    }
+
+    public void Display()
+    {
+        Console.WriteLine(accNo + " " + name + " " + balance);
+    }
+}
+
+class SavingsAccount : Account
+{
+    public double interestRate;
+
+    public SavingsAccount(int accNo, string name, double balance, double interestRate)
+        : base(accNo, name, balance)
+    {
+        this.interestRate = interestRate;
+    }
+
+    public override void Deposit(double amount)
+    {
+        balance += amount + (amount * interestRate / 100);
+    }
+}
+
+class CurrentAccount : Account
+{
+    public double overdraftLimit;
+
+    public CurrentAccount(int accNo, string name, double balance, double overdraftLimit)
+        : base(accNo, name, balance)
+    {
+        this.overdraftLimit = overdraftLimit;
+    }
+
+    public override void Withdraw(double amount)
+    {
+        if (balance - amount >= -overdraftLimit)
+            balance -= amount;
+        else
+            Console.WriteLine("Overdraft limit exceeded");
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        SavingsAccount s = new SavingsAccount(1, "Rahul", 1000, 5);
+        s.Deposit(500);
+        s.Display();
+
+        CurrentAccount c = new CurrentAccount(2, "Amit", 2000, 1000);
+        c.Withdraw(2500);
+        c.Display();
+    }
+}
