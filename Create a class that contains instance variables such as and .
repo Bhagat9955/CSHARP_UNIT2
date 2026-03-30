@@ -1,0 +1,113 @@
+using System;
+
+class Account
+{
+    protected int accountNumber;
+    protected double balance;
+
+    public Account(int accountNumber, double balance)
+    {
+        this.accountNumber = accountNumber;
+        this.balance = balance;
+    }
+
+    public void Deposit(double amount)
+    {
+        balance += amount;
+        Console.WriteLine("Deposited: " + amount);
+    }
+
+    public virtual void Withdraw(double amount)
+    {
+        if (amount <= balance)
+        {
+            balance -= amount;
+            Console.WriteLine("Withdrawn: " + amount);
+        }
+        else
+        {
+            Console.WriteLine("Insufficient balance!");
+        }
+    }
+
+    public void Display()
+    {
+        Console.WriteLine("Account Number: " + accountNumber);
+        Console.WriteLine("Balance: " + balance);
+    }
+}
+
+class SavingsAccount : Account
+{
+    private double interestRate;
+
+    public SavingsAccount(int accountNumber, double balance, double interestRate)
+        : base(accountNumber, balance)
+    {
+        this.interestRate = interestRate;
+    }
+
+    public override void Withdraw(double amount)
+    {
+        if (amount <= balance)
+        {
+            balance -= amount;
+            Console.WriteLine("Savings Withdrawn: " + amount);
+        }
+        else
+        {
+            Console.WriteLine("Cannot withdraw beyond balance in Savings Account!");
+        }
+    }
+
+    public void AddInterest()
+    {
+        double interest = balance * interestRate / 100;
+        balance += interest;
+        Console.WriteLine("Interest added: " + interest);
+    }
+}
+
+class CurrentAccount : Account
+{
+    private double overdraftLimit;
+
+    public CurrentAccount(int accountNumber, double balance, double overdraftLimit)
+        : base(accountNumber, balance)
+    {
+        this.overdraftLimit = overdraftLimit;
+    }
+
+    public override void Withdraw(double amount)
+    {
+        if (amount <= balance + overdraftLimit)
+        {
+            balance -= amount;
+            Console.WriteLine("Current Withdrawn: " + amount);
+        }
+        else
+        {
+            Console.WriteLine("Overdraft limit exceeded!");
+        }
+    }
+}
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        SavingsAccount sa = new SavingsAccount(101, 5000, 5);
+        CurrentAccount ca = new CurrentAccount(102, 3000, 2000);
+
+        sa.Deposit(1000);
+        sa.Withdraw(2000);
+        sa.AddInterest();
+        sa.Display();
+
+        Console.WriteLine();
+
+        ca.Deposit(500);
+        ca.Withdraw(4000);
+        ca.Display();
+    }
+}
