@@ -1,0 +1,21 @@
+using System;
+
+class Program
+{
+    static void Main()
+    {
+        try
+        {
+            int[] arr = { 1, 2, 3 };
+            Console.WriteLine(arr[5]);  // Error: index out of range
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine("Error: " + e.Message);
+        }
+        finally
+        {
+            Console.WriteLine("This block always executes.");
+        }
+    }
+}
